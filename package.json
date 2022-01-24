@@ -9,7 +9,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "standard --fix"
+      "standard --fix",
+      "git add"
     ]
   },
   "author": "",
