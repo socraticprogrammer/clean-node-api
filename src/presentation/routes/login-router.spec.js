@@ -24,10 +24,9 @@ class HttpResponse {
     }
   }
 
-  static serverError (paramName) {
+  static serverError () {
     return {
-      statusCode: 500,
-      body: new MissingParamError(paramName)
+      statusCode: 500
     }
   }
 }
