@@ -7,10 +7,13 @@ const makeSut = () => {
     auth (email, password) {
       this.email = email
       this.password = password
+
+      return this.accessToken
     }
   }
 
   const authUseCaseSpy = new AuthUseCaseSpy()
+  authUseCaseSpy.accessToken = 'valid_token'
   const sut = new LoginRouter(authUseCaseSpy)
 
   return {
@@ -46,6 +49,36 @@ describe('Login Router', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
 
+  test('Should return 401 when invalid credential are provided', () => {
+    const { sut, authUseCaseSpy } = makeSut()
+    authUseCaseSpy.accessToken = null
+    const httpRequest = {
+      body: {
+        email: 'invalid_email@hotmail.com',
+        password: 'invalid_password'
+      }
+    }
+
+    const httpResponse = sut.route(httpRequest)
+
+    expect(httpResponse.statusCode).toEqual(401)
+    expect(httpResponse.body).toEqual(new UnauthorizedError())
+  })
+
+  test('Should return 200 when valid credential are provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'valid_email@hotmail.com',
+        password: 'valid_password'
+      }
+    }
+
+    const httpResponse = sut.route(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(200)
+  })
+
   test('Should return 500 if no httpRequest is provided', () => {
     const { sut } = makeSut()
 
@@ -77,21 +110,6 @@ describe('Login Router', () => {
 
     expect(authUseCaseSpy.email).toBe(httpRequest.body.email)
     expect(authUseCaseSpy.password).toBe(httpRequest.body.password)
-  })
-
-  test('Should return 401 when invalid credential are provided', () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        email: 'invalid_email@hotmail.com',
-        password: 'invalid_password'
-      }
-    }
-
-    const httpResponse = sut.route(httpRequest)
-
-    expect(httpResponse.statusCode).toEqual(401)
-    expect(httpResponse.body).toEqual(new UnauthorizedError())
   })
 
   test('Should return 500 if no AuthUseCase is provided', () => {
