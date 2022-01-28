@@ -8,6 +8,12 @@ module.exports = class HttpResponse {
     }
   }
 
+  static unauthorized () {
+    return {
+      statusCode: 401
+    }
+  }
+
   static serverError () {
     return {
       statusCode: 500
