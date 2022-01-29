@@ -252,7 +252,7 @@ describe('Login Router', () => {
     expect(httpResponse.body).toEqual(new ServerError())
   })
 
-  test('Should return 500 if EmailValidator throw', async () => {
+  test('Should return 500 if EmailValidator throws', async () => {
     const authUseCaseSpy = makeAuthUseCase()
     const emailValidatorWithErrorSpy = makeEmailValidatorWithError()
 
