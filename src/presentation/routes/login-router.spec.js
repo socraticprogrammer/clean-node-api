@@ -201,7 +201,7 @@ describe('Login Router', () => {
     expect(httpResponse.body).toEqual(new ServerError())
   })
 
-  test('Should return 500 if AuthUseCase throw', async () => {
+  test('Should return 500 if AuthUseCase throws', async () => {
     const authUseCaseWithErrorSpy = makeAuthUseCaseWithError()
 
     const sut = new LoginRouter(authUseCaseWithErrorSpy)
