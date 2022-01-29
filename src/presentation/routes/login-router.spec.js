@@ -1,17 +1,31 @@
 const LoginRouter = require('./login-router')
 const MissingParamError = require('../errors/missing-param-error')
+const InvalidParamError = require('../errors/invalid-param-error')
 const UnauthorizedError = require('../errors/unauthorized-error')
 const ServerError = require('../errors/server-error')
 
 const makeSut = () => {
+  const emailValidatorSpy = makeEmailValidator()
   const authUseCaseSpy = makeAuthUseCase()
-  authUseCaseSpy.accessToken = 'valid_token'
-  const sut = new LoginRouter(authUseCaseSpy)
+  const sut = new LoginRouter(authUseCaseSpy, emailValidatorSpy)
 
   return {
     sut,
-    authUseCaseSpy
+    authUseCaseSpy,
+    emailValidatorSpy
   }
+}
+
+const makeEmailValidator = () => {
+  class EmailValidatorSpy {
+    isValid () {
+      return this.isEmailValid
+    }
+  }
+
+  const emailValidatorSpy = new EmailValidatorSpy()
+  emailValidatorSpy.isEmailValid = 'valid_email@hotmail.com'
+  return emailValidatorSpy
 }
 
 const makeAuthUseCase = () => {
@@ -24,12 +38,14 @@ const makeAuthUseCase = () => {
     }
   }
 
-  return new AuthUseCaseSpy()
+  const authUseCaseSpy = new AuthUseCaseSpy()
+  authUseCaseSpy.accessToken = 'valid_token'
+  return authUseCaseSpy
 }
 
 const makeAuthUseCaseWithError = () => {
   class AuthUseCaseSpy {
-    async auth (email, password) {
+    async auth () {
       throw new Error()
     }
   }
@@ -62,6 +78,21 @@ describe('Login Router', () => {
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
+  })
+
+  test('Should return 400 if an invalid email is provided', async () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    emailValidatorSpy.isEmailValid = false
+    const httpRequest = {
+      body: {
+        email: 'invalid_email@hotmail.com',
+        password: 'any_password'
+      }
+    }
+    const httpResponse = await sut.route(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
 
   test('Should return 401 when invalid credential are provided', async () => {
