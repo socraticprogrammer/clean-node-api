@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch --silent --colors --noStackTrace",
     "test:staged": "jest --passWithNoTests --findRelatedTests --silent --noStackTrace",
-    "test:ci": "jest --coverage",
+    "test:ci": "jest --coverage --noStackTrace --silent",
     "prepare": "husky install"
   },
   "standard": {
