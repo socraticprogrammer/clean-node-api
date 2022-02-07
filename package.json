@@ -4,8 +4,8 @@
   "description": "API in NodeJS with Clean Architecture and TDD.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "test:staged": "jest --passWithNoTests",
+    "test": "jest --watch --silent --colors --noStackTrace",
+    "test:staged": "jest --passWithNoTests --findRelatedTests --silent --noStackTrace",
     "prepare": "husky install"
   },
   "standard": {
