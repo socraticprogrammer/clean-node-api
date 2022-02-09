@@ -24,7 +24,7 @@ const makeEmailValidator = () => {
   }
 
   const emailValidatorSpy = new EmailValidatorSpy()
-  emailValidatorSpy.isEmailValid = 'valid_email@hotmail.com'
+  emailValidatorSpy.isEmailValid = 'valid_email@mail.com'
   return emailValidatorSpy
 }
 
@@ -81,7 +81,7 @@ describe('Login Router', () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com'
+        email: 'any_email@mail.com'
       }
     }
     const httpResponse = await sut.route(httpRequest)
@@ -95,7 +95,7 @@ describe('Login Router', () => {
     emailValidatorSpy.isEmailValid = false
     const httpRequest = {
       body: {
-        email: 'invalid_email@hotmail.com',
+        email: 'invalid_email@mail.com',
         password: 'any_password'
       }
     }
@@ -110,7 +110,7 @@ describe('Login Router', () => {
     authUseCaseSpy.accessToken = null
     const httpRequest = {
       body: {
-        email: 'invalid_email@hotmail.com',
+        email: 'invalid_email@mail.com',
         password: 'invalid_password'
       }
     }
@@ -125,7 +125,7 @@ describe('Login Router', () => {
     const { sut, authUseCaseSpy } = makeSut()
     const httpRequest = {
       body: {
-        email: 'valid_email@hotmail.com',
+        email: 'valid_email@mail.com',
         password: 'valid_password'
       }
     }
@@ -160,7 +160,7 @@ describe('Login Router', () => {
 
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -176,7 +176,7 @@ describe('Login Router', () => {
 
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com'
+        email: 'any_email@mail.com'
       }
     }
 
@@ -189,7 +189,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter()
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -204,7 +204,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter({})
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -221,7 +221,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter(authUseCaseWithErrorSpy)
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -238,7 +238,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter(authUseCaseSpy)
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -255,7 +255,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter(authUseCaseSpy, {})
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
@@ -273,7 +273,7 @@ describe('Login Router', () => {
     const sut = new LoginRouter(authUseCaseSpy, emailValidatorWithErrorSpy)
     const httpRequest = {
       body: {
-        email: 'any_email@hotmail.com',
+        email: 'any_email@mail.com',
         password: 'any_password'
       }
     }
