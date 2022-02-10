@@ -9,7 +9,8 @@
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "git-cz"
   },
   "standard": {
     "env": [
@@ -22,6 +23,7 @@
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "lint-staged": "^12.3.1",
@@ -29,5 +31,10 @@
   },
   "dependencies": {
     "koa": "^2.13.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
