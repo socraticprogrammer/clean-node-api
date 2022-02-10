@@ -12,7 +12,9 @@
     "prepare": "husky install"
   },
   "standard": {
-    "env": ["jest"]
+    "env": [
+      "jest"
+    ]
   },
   "author": "",
   "license": "ISC",
