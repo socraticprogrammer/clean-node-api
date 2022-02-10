@@ -19,6 +19,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "lint-staged": "^12.3.1",
