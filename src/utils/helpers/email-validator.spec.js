@@ -1,6 +1,8 @@
+const isEmail = require('validator/lib/isEmail')
+
 class EmailValidator {
   isValid (email) {
-    return true
+    return isEmail(email)
   }
 }
 
