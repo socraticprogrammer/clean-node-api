@@ -30,7 +30,8 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "koa": "^2.13.4"
+    "koa": "^2.13.4",
+    "validator": "^13.7.0"
   },
   "config": {
     "commitizen": {
