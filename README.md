@@ -1,4 +1,4 @@
-# clean-node-api
+# Clean Node API
 API in NodeJS with Clean Architecture and TDD.
 
 <h2>📱 My social networks:</h2>
