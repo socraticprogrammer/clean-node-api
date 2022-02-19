@@ -1,6 +1,21 @@
 const { MissingParamError } = require('../../utils/errors')
 const AuthUseCase = require('./auth-usecase')
 
+const makeLoadUserByEmailRepository = () => {
+  class LoadUserByEmailRepositorySpy {
+    async load (email) {
+      this.email = email
+      return this.user
+    }
+  }
+  const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
+  loadUserByEmailRepositorySpy.user = {
+    password: 'hashed_password'
+  }
+
+  return loadUserByEmailRepositorySpy
+}
+
 const makeEncrypter = () => {
   class EncrypterSpy {
     async compare (password, hashedPassword) {
@@ -16,17 +31,7 @@ const makeEncrypter = () => {
 }
 
 const makeSut = () => {
-  class LoadUserByEmailRepositorySpy {
-    async load (email) {
-      this.email = email
-      return this.user
-    }
-  }
-  const loadUserByEmailRepositorySpy = new LoadUserByEmailRepositorySpy()
-  loadUserByEmailRepositorySpy.user = {
-    password: 'hashed_password'
-  }
-
+  const loadUserByEmailRepositorySpy = makeLoadUserByEmailRepository()
   const encrypterSpy = makeEncrypter()
 
   const sut = new AuthUseCase(loadUserByEmailRepositorySpy, encrypterSpy)
