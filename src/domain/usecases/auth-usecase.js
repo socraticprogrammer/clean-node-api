@@ -21,7 +21,9 @@ module.exports = class AuthUseCase {
       return null
     }
 
-    await this.encrypter.compare(password, user.password)
-    return null
+    const comparePasswordAndHashedPasswordIsValid = await this.encrypter.compare(password, user.password)
+    if (!comparePasswordAndHashedPasswordIsValid) {
+      return null
+    }
   }
 }
