@@ -80,14 +80,14 @@ describe('Auth UseCase', () => {
     const { sut, loadUserByEmailRepositorySpy } = makeSut()
     loadUserByEmailRepositorySpy.user = null
     const accessToken = await sut.auth('invalid_email@mail.com', 'any_password')
-    expect(accessToken).toBe(null)
+    expect(accessToken).toBeNull()
   })
 
   test('Should return null if an password is invalid ', async () => {
     const { sut, encrypterSpy } = makeSut()
     encrypterSpy.isValid = false
     const accessToken = await sut.auth('valid_email@mail.com', 'invalid_password')
-    expect(accessToken).toBe(null)
+    expect(accessToken).toBeNull()
   })
 
   test('Should call Encrypter with correct values', async () => {
