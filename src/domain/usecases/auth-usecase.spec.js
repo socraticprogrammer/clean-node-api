@@ -38,6 +38,16 @@ const makeUpdateAccessTokenRepository = () => {
   return new UpdateAccessTokenRepositorySpy()
 }
 
+const makeUpdateAccessTokenRepositoryWithError = () => {
+  class UpdateAccessTokenRepositorySpy {
+    async update () {
+      throw new Error()
+    }
+  }
+
+  return new UpdateAccessTokenRepositorySpy()
+}
+
 const makeEncrypter = () => {
   class EncrypterSpy {
     async compare (password, hashedPassword) {
@@ -177,6 +187,7 @@ describe('Auth UseCase', () => {
     const invalid = {}
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
+    const tokenGenerator = makeTokenGenerator()
 
     const suts = [
       makeSutWithDependency(),
@@ -198,6 +209,17 @@ describe('Auth UseCase', () => {
         loadUserByEmailRepository,
         encrypter,
         tokenGenerator: invalid
+      }),
+      makeSutWithDependency({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator
+      }),
+      makeSutWithDependency({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator,
+        updateAccessTokenRepository: invalid
       })
     ]
 
@@ -210,6 +232,7 @@ describe('Auth UseCase', () => {
   test('Should throw if any dependency throws', async () => {
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
+    const tokenGenerator = makeTokenGenerator()
 
     const suts = [
       makeSutWithDependency({ loadUserByEmailRepository: makeLoadUserByEmailRepositoryWithError() }),
@@ -221,6 +244,17 @@ describe('Auth UseCase', () => {
         loadUserByEmailRepository,
         encrypter,
         tokenGenerator: makeTokenGeneratorWithError()
+      }),
+      makeSutWithDependency({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator
+      }),
+      makeSutWithDependency({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator,
+        updateAccessTokenRepository: makeUpdateAccessTokenRepositoryWithError()
       })
     ]
 
