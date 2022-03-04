@@ -63,7 +63,7 @@ const makeSut = () => {
   }
 }
 
-const makeSuts = (dependency) => {
+const makeSutWithDependency = (dependency) => {
   return new AuthUseCase(dependency)
 }
 
@@ -128,22 +128,22 @@ describe('Auth UseCase', () => {
     const encrypter = makeEncrypter()
 
     const suts = [
-      makeSuts(),
-      makeSuts({}),
-      makeSuts({}),
-      makeSuts({ loadUserByEmailRepository: invalid }),
-      makeSuts({
+      makeSutWithDependency(),
+      makeSutWithDependency({}),
+      makeSutWithDependency({}),
+      makeSutWithDependency({ loadUserByEmailRepository: invalid }),
+      makeSutWithDependency({
         loadUserByEmailRepository
       }),
-      makeSuts({
+      makeSutWithDependency({
         loadUserByEmailRepository,
         encrypter: invalid
       }),
-      makeSuts({
+      makeSutWithDependency({
         loadUserByEmailRepository,
         encrypter
       }),
-      makeSuts({
+      makeSutWithDependency({
         loadUserByEmailRepository,
         encrypter,
         tokenGenerator: invalid
