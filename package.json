@@ -30,6 +30,7 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "koa": "^2.13.4",
     "validator": "^13.7.0"
   },
