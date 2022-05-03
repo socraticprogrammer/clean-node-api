@@ -2,7 +2,7 @@
   "name": "clean-node-api",
   "version": "1.0.0",
   "description": "API in NodeJS with Clean Architecture and TDD.",
-  "main": "index.js",
+  "main": "src/main/index.js",
   "scripts": {
     "test": "jest --colors --noStackTrace --passWithNoTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
