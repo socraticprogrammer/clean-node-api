@@ -19,5 +19,5 @@ API in NodeJS with Clean Architecture and TDD.
     <img alt="WhatsApp" src="https://img.shields.io/badge/Whatsapp--%23F8952D?style=social&logo=whatsapp"></a>
 </p>
 
-<h4>Made with ❤ by Thalles Gabriel 🔥 </h4>
+<h4 align="center">Made with ❤ by Thalles Gabriel 🔥 </h4>
 
