@@ -14,4 +14,4 @@ setupApp(app);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-module.exports = app;
+module.exports = { app, router };
