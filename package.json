@@ -4,6 +4,7 @@
   "description": "API in NodeJS with Clean Architecture and TDD.",
   "main": "src/main/index.js",
   "scripts": {
+    "start": "node .",
     "test": "jest --colors --noStackTrace --passWithNoTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
