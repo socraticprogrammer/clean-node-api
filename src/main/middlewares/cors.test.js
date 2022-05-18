@@ -2,8 +2,7 @@ const supertest = require("supertest");
 const { app, router } = require("../config/app");
 
 describe("CORS Middleware", () => {
-  let server;
-  let request;
+  let server, request;
 
   beforeAll(() => {
     server = app.listen();
