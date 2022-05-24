@@ -2,7 +2,9 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const setupApp = require("./setup");
 
-const router = new Router();
+const router = new Router({
+  prefix: "/api",
+});
 const app = new Koa();
 
 router.get("/", (ctx) => {
