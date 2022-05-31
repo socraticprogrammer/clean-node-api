@@ -121,7 +121,7 @@ describe('Login Router', () => {
     const httpResponse = await sut.route(httpRequest)
 
     expect(httpResponse.statusCode).toEqual(401)
-    expect(httpResponse.body).toEqual(new UnauthorizedError())
+    expect(httpResponse.body.error).toEqual(new UnauthorizedError().message)
   })
 
   test('Should return 200 when valid credential are provided', async () => {
