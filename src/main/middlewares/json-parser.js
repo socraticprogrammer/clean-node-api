@@ -1,2 +1,3 @@
-const bodyParser = require("koa-bodyparser");
-module.exports = bodyParser();
+const express = require('express')
+
+module.exports = express.json()

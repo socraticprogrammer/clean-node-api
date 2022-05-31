@@ -1,19 +1,12 @@
-const Koa = require("koa");
-const Router = require("koa-router");
-const setupApp = require("./setup");
+const express = require('express')
+const setupApp = require('./setup')
 
-const router = new Router({
-  prefix: "/api",
-});
-const app = new Koa();
+const app = express()
 
-router.get("/", (ctx) => {
-  ctx.body = "Hello world!";
-});
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
 
-setupApp(app);
+setupApp(app)
 
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-module.exports = { app, router };
+module.exports = app

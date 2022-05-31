@@ -1,22 +1,15 @@
-const supertest = require("supertest");
-const { app, router } = require("../config/app");
+const request = require('supertest')
+const app = require('../config/app')
 
-describe("CORS Middleware", () => {
-  let server, request;
+describe('CORS Middleware', () => {
+  test('Should enable CORS', async () => {
+    app.get('/test_cors', (ctx) => {
+      ctx.body = ''
+    })
 
-  beforeAll(() => {
-    server = app.listen();
-    request = supertest(server);
-  });
-
-  test("Should enable CORS", async () => {
-    router.get("/test_cors", (ctx) => {
-      ctx.body = "";
-    });
-
-    const response = await request.get("/test_cors");
-    expect(response.headers["access-control-allow-origin"]).toBe("*");
-    expect(response.headers["access-control-allow-methods"]).toBe("*");
-    expect(response.headers["access-control-allow-headers"]).toBe("*");
-  });
-});
+    const response = await request(app).get('/test_cors')
+    expect(response.headers['access-control-allow-origin']).toBe('*')
+    expect(response.headers['access-control-allow-methods']).toBe('*')
+    expect(response.headers['access-control-allow-headers']).toBe('*')
+  })
+})

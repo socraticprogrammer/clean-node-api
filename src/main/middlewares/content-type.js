@@ -1,4 +1,4 @@
-module.exports = async (ctx, next) => {
-  await next();
-  ctx.response.type = "json";
-};
+module.exports = async (req, res, next) => {
+  res.type('json')
+  next()
+}

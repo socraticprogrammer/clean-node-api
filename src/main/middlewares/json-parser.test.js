@@ -1,22 +1,15 @@
-const supertest = require("supertest");
-const { app, router } = require("../config/app");
+const request = require('supertest')
+const app = require('../config/app')
 
-describe("JSON Parser Middleware", () => {
-  let server, request;
+describe('JSON Parser Middleware', () => {
+  test('Should parse body at JSON', async () => {
+    app.post('/test_json_parser', (req, res) => {
+      res.send(req.body)
+    })
 
-  beforeAll(() => {
-    server = app.listen();
-    request = supertest(server);
-  });
-
-  test("Should parse body at JSON", async () => {
-    router.post("/test_json_parser", (ctx) => {
-      ctx.response.body = ctx.request.body;
-    });
-
-    await request
-      .post("/test_json_parser")
-      .send({ name: "any_name" })
-      .expect({ name: "any_name" });
-  });
-});
+    await request(app)
+      .post('/test_json_parser')
+      .send({ name: 'any_name' })
+      .expect({ name: 'any_name' })
+  })
+})

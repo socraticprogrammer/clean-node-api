@@ -1,6 +1,6 @@
-module.exports = async (ctx, next) => {
-  await next();
-  ctx.set("access-control-allow-origin", "*");
-  ctx.set("access-control-allow-methods", "*");
-  ctx.set("access-control-allow-headers", "*");
-};
+module.exports = async (req, res, next) => {
+  res.set('access-control-allow-origin', '*')
+  res.set('access-control-allow-methods', '*')
+  res.set('access-control-allow-headers', '*')
+  next()
+}
