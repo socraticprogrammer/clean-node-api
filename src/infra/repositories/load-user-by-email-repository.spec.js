@@ -1,13 +1,14 @@
 const MongoHelper = require('../helpers/mongo-helper')
 const LoadUserByEmailRepository = require('./load-user-by-email-repository')
 const MissingParamError = require('../../utils/errors/missing-param-error')
-let userModel
 
 const makeSut = () => {
   return new LoadUserByEmailRepository()
 }
 
 describe('LoadUserByEmail Repository', () => {
+  let userModel
+
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
     userModel = await MongoHelper.getCollection('users')
