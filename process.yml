@@ -1,0 +1,6 @@
+apps:
+  - name: clean-node-api
+    script: ./src/main/index.js
+    exec_mode: cluster
+    instances: max
+    ignore_watch : ['node_modules']
