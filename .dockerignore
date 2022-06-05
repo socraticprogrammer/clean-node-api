@@ -1,0 +1,9 @@
+.git
+Dockerfile
+.gitignore
+README.md
+env.*
+coverage
+node_modules
+.vscode
+.husky
