@@ -1,15 +1,25 @@
+ARG PORT=3000
+
 FROM node:17.9.0-alpine
+
+ENV NODE_ENV production
+
+RUN apk --no-cache -U upgrade
 
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 
-COPY package*.json .
+RUN npm i pm2 -g
+
+COPY package*.json process.yml ./
+
+USER node
 
 RUN npm i --production
 
 COPY --chown=node:node . .
 
-EXPOSE 3000
+EXPOSE ${PORT}
 
-CMD node ./src/main/index.js
+CMD pm2 start process.yml
