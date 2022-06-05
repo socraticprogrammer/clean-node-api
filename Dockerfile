@@ -16,7 +16,7 @@ COPY package*.json process.yml ./
 
 USER node
 
-RUN npm i --production
+RUN npm i --only=production
 
 COPY --chown=node:node . .
 
