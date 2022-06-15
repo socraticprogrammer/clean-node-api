@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "API in Node.js with Clean Architecture and TDD.",
   "main": "src/main/index.js",
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "keywords": [
     "clean architecture",
     "clean code",
