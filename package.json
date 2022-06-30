@@ -36,7 +36,6 @@
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --silent --findRelatedTests",
     "test:ci": "npm test -- --coverage --silent",
-    "prepare": "husky install",
     "commit": "git-cz"
   },
   "standard": {
