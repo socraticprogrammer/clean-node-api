@@ -1,19 +1,43 @@
+
 version: '3.9'
 services:
   app:
     container_name: clean-node-api
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: clean-node-api:0.1.0
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MONGO_URL: 
+      PORT: 3000
+      TOKEN_SECRET: secret
     ports:
       - 3000:3000
+    networks:
+      - clean-node-network
     depends_on:
       - db
 
   db:
     container_name: clean-node-api-db
-    image: mongo
+    image: mongo:latest
     restart: always
     ports:
       - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 1234
+    volumes:
+      - data:/data/db
+    networks:
+      - clean-node-network
+
+networks:
+  clean-node-network:
+    driver: bridge
+
+volumes:
+  data:
