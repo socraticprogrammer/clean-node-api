@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     environment:
-      MONGO_URL: 
+      MONGO_URL: mongodb://cleanuser:clean1234@localhost:27017/cleandb
       PORT: 3000
       TOKEN_SECRET: secret
     ports:
@@ -23,7 +23,7 @@ services:
 
   db:
     container_name: clean-node-api-db
-    image: mongo:latest
+    image: mongo:latest 
     restart: always
     ports:
       - 27017:27017
