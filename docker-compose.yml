@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     image: clean-node-api:0.1.0
     restart: always
+    command: npm run seed
     env_file:
       - .env
     environment:
@@ -34,6 +35,15 @@ services:
       - data:/data/db
     networks:
       - clean-node-network
+
+  dbClientTemp:
+   image: mongo:latest
+   container_name: db-client-temp
+   links:
+    - db
+   command: mongo -u root -p 1234 --host localhost --eval "db.getSiblingDB('cleandb').createUser({user:'cleanuser', pwd:'clean1234', roles:[{role:'readWrite',db:'cleandb'}]});"
+   depends_on:
+    - db
 
 networks:
   clean-node-network:
